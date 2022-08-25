@@ -1,6 +1,7 @@
 package com.api.gerenciadordecontas.service;
 
 import com.api.gerenciadordecontas.enums.StatusContas;
+import com.api.gerenciadordecontas.enums.TipoContas;
 import com.api.gerenciadordecontas.model.ModelRequest;
 import com.api.gerenciadordecontas.model.ModelResponse;
 import com.api.gerenciadordecontas.repository.GerenciadorRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,10 +37,9 @@ public class GerenciadorService {
        return gerenciadorRepository.findById(id);
     }
 
-    public List<ModelEntity> buscarTodos(ModelEntity modelEntity){
-       List< ModelEntity> entity = gerenciadorRepository.findAll();
-       return entity;
+    public List<ModelEntity> buscarTodos(){
 
+        return gerenciadorRepository.minhasBuscas();
     }
 
     public ModelEntity alterarCadastro(ModelEntity modelEntity) {
@@ -55,8 +56,14 @@ public class GerenciadorService {
         return gerenciadorRepository.save(entity);
 
     }
-
     public void deletar(Long id) {
         gerenciadorRepository.deleteById(id);
     }
+
+    public List<ModelEntity> findByStatuContas(StatusContas statusContas){
+        return gerenciadorRepository.findByStatusContas(statusContas);
+    }public List<ModelEntity> findByTipoContas(TipoContas tipoContas){
+        return gerenciadorRepository.findByTipoContas(tipoContas);
+    }
+
 }

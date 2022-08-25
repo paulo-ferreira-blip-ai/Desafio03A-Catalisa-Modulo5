@@ -5,10 +5,11 @@ import com.api.gerenciadordecontas.enums.TipoContas;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Table(name = "gerenciador_de_contas")
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ModelEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,4 +44,6 @@ public class ModelEntity {
     @Column(name = "tipoContas")
     @Enumerated(value = EnumType.STRING)
     private TipoContas tipoContas;
+
 }
+

@@ -1,6 +1,9 @@
 package com.api.gerenciadordecontas.controller;
 
+import com.api.gerenciadordecontas.enums.StatusContas;
+import com.api.gerenciadordecontas.enums.TipoContas;
 import com.api.gerenciadordecontas.model.ModelRequest;
+import com.api.gerenciadordecontas.model.ModelResponse;
 import com.api.gerenciadordecontas.repository.GerenciadorRepository;
 import com.api.gerenciadordecontas.repository.ModelEntity;
 import com.api.gerenciadordecontas.service.GerenciadorService;
@@ -13,10 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(path = "/contas")
@@ -41,9 +41,18 @@ public class GerenciadorController {
         return ResponseEntity.ok(gerenciadorService.buscarPorId(id));
     }
 
+    @GetMapping(path = "/status/{statusContas}")
+    private List<ModelEntity> findByStatusContas(@PathVariable StatusContas statusContas){
+        return gerenciadorService.findByStatuContas(statusContas);
+    }
+    @GetMapping(path = "/tipo/{tipoContas}")
+    private List<ModelEntity> findByTipoContas(@PathVariable TipoContas tipoContas){
+        return gerenciadorService.findByTipoContas(tipoContas);
+    }
+
     @GetMapping
-    public ResponseEntity<List<ModelEntity>> buscarTodos(ModelEntity modelEntity){
-        return ResponseEntity.ok(gerenciadorService.buscarTodos(modelEntity));
+    public ResponseEntity<List<ModelEntity>> buscarTodos(){
+        return ResponseEntity.ok(gerenciadorService.buscarTodos());
     }
 
     @PatchMapping(path = "/{id}")
