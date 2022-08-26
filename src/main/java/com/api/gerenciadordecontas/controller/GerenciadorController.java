@@ -14,9 +14,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/contas")
@@ -29,12 +31,17 @@ public class GerenciadorController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> cadastrar(@RequestBody ModelRequest modelRequest) {
-        modelRequest.setDataDeCadastro(LocalDate.now(ZoneId.of("UTC-03:00")));
+        if (gerenciadorService.existsByNome(modelRequest.getNome())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Nome já está em uso!");
+        }
+
+        modelRequest.setDataDeCadastro(LocalDateTime.now(ZoneId.of("UTC-03:00")));
+
         return ResponseEntity.ok(gerenciadorService.cadastrar(modelRequest));
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<ModelEntity>> buscarPorID(@PathVariable Long id) {
+    public ResponseEntity<ModelEntity> buscarPorID(@PathVariable Long id) {
         if (!gerenciadorRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -42,16 +49,17 @@ public class GerenciadorController {
     }
 
     @GetMapping(path = "/status/{statusContas}")
-    private List<ModelEntity> findByStatusContas(@PathVariable StatusContas statusContas){
-        return gerenciadorService.findByStatuContas(statusContas);
+    private ResponseEntity<List<ModelEntity>> findByStatusContas(@PathVariable StatusContas statusContas) {
+        return ResponseEntity.ok(gerenciadorService.findByStatuContas(statusContas));
     }
+
     @GetMapping(path = "/tipo/{tipoContas}")
-    private List<ModelEntity> findByTipoContas(@PathVariable TipoContas tipoContas){
-        return gerenciadorService.findByTipoContas(tipoContas);
+    private ResponseEntity<List<ModelEntity>> findByTipoContas(@PathVariable TipoContas tipoContas) {
+        return ResponseEntity.ok(gerenciadorService.findByTipoContas(tipoContas));
     }
 
     @GetMapping
-    public ResponseEntity<List<ModelEntity>> buscarTodos(){
+    public ResponseEntity<List<ModelResponse>> buscarTodos() {
         return ResponseEntity.ok(gerenciadorService.buscarTodos());
     }
 
@@ -66,7 +74,7 @@ public class GerenciadorController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity deletar(@PathVariable Long id) {
         if (!gerenciadorRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id não encontrado");
         }
         gerenciadorService.deletar(id);
         return null;
@@ -83,8 +91,6 @@ public class GerenciadorController {
         });
         return errors;
     }
-
-
 }
 
 

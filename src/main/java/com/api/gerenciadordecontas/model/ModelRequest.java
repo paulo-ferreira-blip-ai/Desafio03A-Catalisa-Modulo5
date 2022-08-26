@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -14,18 +13,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class ModelRequest {
-    @NotBlank(message = "Campo nome vazio")
+
     private String nome;
-    @NotBlank(message = "Campo valor vazio")
     private double valor;
-
-    private LocalDate dataDeCadastro;
-    @NotBlank(message = "Campo data de vencimento vazio")
+    private LocalDateTime dataDeCadastro;
     private LocalDate dataDeVencimento;
-
-    private LocalDate dataDePagamento;
-
+    private LocalDateTime dataDePagamento;
     private StatusContas statusContas;
-    @NotBlank(message = "Campo tipo de contas vazio")
     private TipoContas tipoContas;
 }
