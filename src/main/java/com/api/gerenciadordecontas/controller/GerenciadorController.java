@@ -72,7 +72,7 @@ public class GerenciadorController {
     }
 
     @DeleteMapping(path = "/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity deletar(@PathVariable Long id) {
         if (!gerenciadorRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id não encontrado");
