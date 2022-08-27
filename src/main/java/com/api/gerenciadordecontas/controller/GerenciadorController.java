@@ -43,13 +43,13 @@ public class GerenciadorController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<ModelEntity> buscarPorID(@PathVariable Long id) {
         if (!gerenciadorRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.unprocessableEntity().build();
         }
         return ResponseEntity.ok(gerenciadorService.buscarPorId(id));
     }
 
     @GetMapping(path = "/status/{statusContas}")
-    public ResponseEntity<List<ModelEntity>> findByStatusContas(@PathVariable StatusContas statusContas) {
+    public ResponseEntity<Object> findByStatusContas(@PathVariable StatusContas statusContas) {
         return ResponseEntity.ok(gerenciadorService.findByStatuContas(statusContas));
     }
 
@@ -66,7 +66,7 @@ public class GerenciadorController {
     @PatchMapping(path = "/{id}")
     public ResponseEntity<ModelEntity> alterarStatus(@PathVariable Long id, @RequestBody ModelEntity modelEntity) {
         if (!gerenciadorRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.unprocessableEntity().build();
         }
         return ResponseEntity.ok(gerenciadorService.alterarCadastro(modelEntity));
     }
@@ -75,7 +75,7 @@ public class GerenciadorController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity deletar(@PathVariable Long id) {
         if (!gerenciadorRepository.existsById(id)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id não encontrado");
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Id não encontrado");
         }
         gerenciadorService.deletar(id);
         return null;
