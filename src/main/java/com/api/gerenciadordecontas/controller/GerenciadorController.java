@@ -49,12 +49,12 @@ public class GerenciadorController {
     }
 
     @GetMapping(path = "/status/{statusContas}")
-    private ResponseEntity<List<ModelEntity>> findByStatusContas(@PathVariable StatusContas statusContas) {
+    public ResponseEntity<List<ModelEntity>> findByStatusContas(@PathVariable StatusContas statusContas) {
         return ResponseEntity.ok(gerenciadorService.findByStatuContas(statusContas));
     }
 
     @GetMapping(path = "/tipo/{tipoContas}")
-    private ResponseEntity<List<ModelEntity>> findByTipoContas(@PathVariable TipoContas tipoContas) {
+    public ResponseEntity<List<ModelEntity>> findByTipoContas(@PathVariable TipoContas tipoContas) {
         return ResponseEntity.ok(gerenciadorService.findByTipoContas(tipoContas));
     }
 
@@ -72,6 +72,7 @@ public class GerenciadorController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity deletar(@PathVariable Long id) {
         if (!gerenciadorRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Id não encontrado");
