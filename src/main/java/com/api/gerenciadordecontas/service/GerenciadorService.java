@@ -2,16 +2,20 @@ package com.api.gerenciadordecontas.service;
 
 import com.api.gerenciadordecontas.enums.StatusContas;
 import com.api.gerenciadordecontas.enums.TipoContas;
+import com.api.gerenciadordecontas.exceptions.EntityNotFoundException;
 import com.api.gerenciadordecontas.model.ModelRequest;
 import com.api.gerenciadordecontas.model.ModelResponse;
 import com.api.gerenciadordecontas.repository.GerenciadorRepository;
 import com.api.gerenciadordecontas.repository.ModelEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.api.gerenciadordecontas.enums.StatusContas.PAGO;
@@ -21,7 +25,11 @@ public class GerenciadorService {
     @Autowired
     private GerenciadorRepository gerenciadorRepository;
 
+
     public ModelResponse cadastrar(ModelRequest modelRequest) {
+
+        modelRequest.setDataDeCadastro(LocalDateTime.now(ZoneId.of("UTC-03:00")));
+
         StatusContas resposta1 = StatusContas.condicoes(modelRequest.getDataDeVencimento(), modelRequest.getDataDeCadastro());
         modelRequest.setStatusContas(resposta1);
 
@@ -35,12 +43,13 @@ public class GerenciadorService {
     }
 
     public ModelEntity buscarPorId(Long id) {
-        return gerenciadorRepository.findById(id).get();
+        return gerenciadorRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("ID not found "+ id));
     }
 
     public List<ModelResponse> buscarTodos() {
-        List<ModelEntity> campos = gerenciadorRepository.findAll();
 
+        List<ModelEntity> campos = gerenciadorRepository.findAll();
         return campos.stream().map(campo -> new ModelResponse(campo.getId(), campo.getNome(), campo.getValor(), campo.getStatusContas())).collect(Collectors.toList());
     }
 
