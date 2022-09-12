@@ -4,8 +4,11 @@ import com.api.gerenciadordecontas.enums.StatusContas;
 import com.api.gerenciadordecontas.enums.TipoContas;
 import com.api.gerenciadordecontas.model.ModelRequest;
 import com.api.gerenciadordecontas.model.ModelResponse;
-import com.api.gerenciadordecontas.repository.ModelEntity;
+import com.api.gerenciadordecontas.model.ModelEntity;
 import com.api.gerenciadordecontas.service.GerenciadorService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+@Tag(name= "CRUD de contas a pagar")
 @RestController
 @RequestMapping(path = "/contas")
 @Validated
@@ -23,8 +26,10 @@ public class GerenciadorController {
     private GerenciadorService gerenciadorService;
 
     @PostMapping
+    @Operation(summary = "Operação para realizar cadastro de contas")
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> cadastrar(@Valid @RequestBody ModelRequest modelRequest) {
+    public ResponseEntity<Object> cadastrar( @Valid @RequestBody ModelRequest modelRequest) {
         if (gerenciadorService.existsByNome(modelRequest.getNome())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Nome já está em uso!");
         }
@@ -32,7 +37,7 @@ public class GerenciadorController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ModelEntity> buscarPorID(@PathVariable Long id) {
+    public ResponseEntity<ModelEntity> buscarPorID(@Parameter(description = "ID da conta") @PathVariable Long id) {
         return ResponseEntity.ok(gerenciadorService.buscarPorId(id));
     }
 

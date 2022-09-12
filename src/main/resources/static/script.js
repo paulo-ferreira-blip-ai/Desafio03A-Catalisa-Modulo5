@@ -8,8 +8,8 @@ const DataDeVencimento = document.querySelector('#dataDeVencimento')
 let itens
 let id
 
-const getItensBD = () => JSON.parse(localStorage.getItem('gerenciador')) ?? []
-const setItensBD = () => localStorage.setItem('gerenciador', JSON.stringify(itens))
+const getItensBD = () => JSON.parse(localStorage.getItem('gerenciador_de_contas')) ?? []
+const setItensBD = () => localStorage.setItem('gerenciador_de_contas', JSON.stringify(itens))
 
 function loadItens() {
     itens = getItensBD()

@@ -19,6 +19,7 @@ public class ModelRequest {
 
     @NotEmpty
     @NotNull
+
     private String nome;
     @Min(value = 1)
     private double valor;

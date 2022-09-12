@@ -1,4 +1,4 @@
-package com.api.gerenciadordecontas.repository;
+package com.api.gerenciadordecontas.model;
 
 import com.api.gerenciadordecontas.enums.StatusContas;
 import com.api.gerenciadordecontas.enums.TipoContas;
