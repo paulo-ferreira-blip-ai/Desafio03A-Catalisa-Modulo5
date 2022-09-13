@@ -1,7 +1,6 @@
 package com.api.gerenciadordecontas.controller;
 
 import com.api.gerenciadordecontas.model.Enderecos;
-import com.api.gerenciadordecontas.model.Usuarios;
 import com.api.gerenciadordecontas.service.ServiceEnderecos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ public class ControllerEnderecos {
     private ServiceEnderecos serviceEnderecos;
 
     @GetMapping
-    public ResponseEntity< List<Enderecos>> buscarTodos() {
+    public ResponseEntity<List<Enderecos>> buscarTodos() {
         return ResponseEntity.ok(serviceEnderecos.buscarTodos());
     }
 
@@ -30,12 +29,12 @@ public class ControllerEnderecos {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity< Enderecos> cadastrar(@Valid @RequestBody Enderecos enderecos) {
+    public ResponseEntity<Enderecos> cadastrar(@Valid @RequestBody Enderecos enderecos) {
         return ResponseEntity.ok(serviceEnderecos.cadastrar(enderecos));
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity< Enderecos> alterar(@PathVariable Long id, @RequestBody Enderecos enderecos) {
+    public ResponseEntity<Enderecos> alterar(@PathVariable Long id, @RequestBody Enderecos enderecos) {
         return ResponseEntity.ok(serviceEnderecos.alterar(enderecos));
     }
 

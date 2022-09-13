@@ -20,24 +20,24 @@ public class ControllerEstados {
     private ServiceEstados serviceEstados;
 
     @GetMapping
-    public ResponseEntity< List<Estados>> buscarTodos() {
-        return ResponseEntity.ok( serviceEstados.buscarTodos());
+    public ResponseEntity<List<Estados>> buscarTodos() {
+        return ResponseEntity.ok(serviceEstados.buscarTodos());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity< Optional<Estados>> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok( serviceEstados.buscarId(id));
+    public ResponseEntity<Optional<Estados>> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(serviceEstados.buscarId(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity< Estados> cadastrar(@Valid @RequestBody Estados estados) {
-        return ResponseEntity.ok( serviceEstados.cadastrar(estados));
+    public ResponseEntity<Estados> cadastrar(@Valid @RequestBody Estados estados) {
+        return ResponseEntity.ok(serviceEstados.cadastrar(estados));
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity< Estados> alterar(@PathVariable Long id, @RequestBody Estados estados) {
-        return ResponseEntity.ok( serviceEstados.alterar(estados));
+    public ResponseEntity<Estados> alterar(@PathVariable Long id, @RequestBody Estados estados) {
+        return ResponseEntity.ok(serviceEstados.alterar(estados));
     }
 
     @DeleteMapping(path = "/{id}")

@@ -1,11 +1,9 @@
 package com.api.gerenciadordecontas.service;
 
 import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
-import com.api.gerenciadordecontas.enums.TipoContas;
 import com.api.gerenciadordecontas.enums.TipoRecebimento;
 import com.api.gerenciadordecontas.exceptions.EntityNotFoundException;
 import com.api.gerenciadordecontas.factory.Factory;
-import com.api.gerenciadordecontas.model.ModelEntity;
 import com.api.gerenciadordecontas.repository.ContasAReceber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

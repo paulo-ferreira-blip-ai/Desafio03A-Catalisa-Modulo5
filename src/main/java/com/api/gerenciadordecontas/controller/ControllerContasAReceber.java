@@ -1,9 +1,7 @@
 package com.api.gerenciadordecontas.controller;
 
-import com.api.gerenciadordecontas.enums.TipoContas;
 import com.api.gerenciadordecontas.enums.TipoRecebimento;
 import com.api.gerenciadordecontas.model.ContasAReceber;
-import com.api.gerenciadordecontas.model.ModelEntity;
 import com.api.gerenciadordecontas.service.ServiceContasAReceber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

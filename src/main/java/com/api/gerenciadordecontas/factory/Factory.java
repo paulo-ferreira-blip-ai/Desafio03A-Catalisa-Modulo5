@@ -3,8 +3,6 @@ package com.api.gerenciadordecontas.factory;
 import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
 import com.api.gerenciadordecontas.enums.TipoRecebimento;
 
-import java.util.Date;
-
 public class Factory {
     public static Calculador getStatus(RecebimentoAlugueis statusRecebimento, TipoRecebimento tipoRecebimento) {
         if (statusRecebimento == RecebimentoAlugueis.EM_ATRASO) {

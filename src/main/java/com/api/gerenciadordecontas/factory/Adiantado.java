@@ -4,7 +4,7 @@ import com.api.gerenciadordecontas.model.ContasAReceber;
 
 import java.math.BigDecimal;
 
-public class Adiantado implements Calculador{
+public class Adiantado implements Calculador {
     @Override
     public BigDecimal calculoFactory(ContasAReceber contasAReceber) {
 

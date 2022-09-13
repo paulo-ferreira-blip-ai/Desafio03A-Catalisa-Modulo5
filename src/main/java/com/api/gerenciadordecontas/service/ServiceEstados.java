@@ -13,25 +13,25 @@ public class ServiceEstados {
     @Autowired
     private Estados estados;
 
-    public List<com.api.gerenciadordecontas.model.Estados> buscarTodos(){
+    public List<com.api.gerenciadordecontas.model.Estados> buscarTodos() {
         return estados.findAll();
     }
 
-    public Optional<com.api.gerenciadordecontas.model.Estados> buscarId(Long id ){
+    public Optional<com.api.gerenciadordecontas.model.Estados> buscarId(Long id) {
         return Optional.ofNullable(estados.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("ID not found " + id)));
     }
 
-    public com.api.gerenciadordecontas.model.Estados cadastrar(com.api.gerenciadordecontas.model.Estados estados){
+    public com.api.gerenciadordecontas.model.Estados cadastrar(com.api.gerenciadordecontas.model.Estados estados) {
 
         return this.estados.save(estados);
     }
 
-    public com.api.gerenciadordecontas.model.Estados alterar(com.api.gerenciadordecontas.model.Estados estados){
+    public com.api.gerenciadordecontas.model.Estados alterar(com.api.gerenciadordecontas.model.Estados estados) {
         return this.estados.save(estados);
     }
 
-    public void deletar(Long id){
+    public void deletar(Long id) {
         estados.deleteById(id);
     }
 }

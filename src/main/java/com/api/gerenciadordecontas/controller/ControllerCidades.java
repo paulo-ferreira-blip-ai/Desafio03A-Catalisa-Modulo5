@@ -20,12 +20,12 @@ public class ControllerCidades {
     private ServiceCidades serviceCidades;
 
     @GetMapping
-    public ResponseEntity< List<Cidades>> buscarTodos() {
+    public ResponseEntity<List<Cidades>> buscarTodos() {
         return ResponseEntity.ok(serviceCidades.buscarTodos());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity< Optional<Cidades>> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Optional<Cidades>> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(serviceCidades.buscarId(id));
     }
 
@@ -36,7 +36,7 @@ public class ControllerCidades {
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity< Cidades> alterar(@PathVariable Long id,@RequestBody Cidades cidades) {
+    public ResponseEntity<Cidades> alterar(@PathVariable Long id, @RequestBody Cidades cidades) {
         return ResponseEntity.ok(serviceCidades.alterar(cidades));
     }
 

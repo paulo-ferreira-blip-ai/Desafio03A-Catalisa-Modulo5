@@ -14,28 +14,27 @@ public class ServiceCidades {
     @Autowired
     private Cidades cidades;
 
-    public List<com.api.gerenciadordecontas.model.Cidades> buscarTodos(){
+    public List<com.api.gerenciadordecontas.model.Cidades> buscarTodos() {
         return cidades.findAll();
     }
 
-    public Optional<com.api.gerenciadordecontas.model.Cidades> buscarId(Long id ){
+    public Optional<com.api.gerenciadordecontas.model.Cidades> buscarId(Long id) {
         return Optional.ofNullable(cidades.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("ID not found " + id)));
     }
 
-    public com.api.gerenciadordecontas.model.Cidades cadastrar(com.api.gerenciadordecontas.model.Cidades cidades){
+    public com.api.gerenciadordecontas.model.Cidades cadastrar(com.api.gerenciadordecontas.model.Cidades cidades) {
 
         return this.cidades.save(cidades);
     }
 
-    public com.api.gerenciadordecontas.model.Cidades alterar(com.api.gerenciadordecontas.model.Cidades cidades){
+    public com.api.gerenciadordecontas.model.Cidades alterar(com.api.gerenciadordecontas.model.Cidades cidades) {
         return this.cidades.save(cidades);
     }
 
-    public void deletar(Long id){
+    public void deletar(Long id) {
         cidades.deleteById(id);
     }
-
 
 
 }

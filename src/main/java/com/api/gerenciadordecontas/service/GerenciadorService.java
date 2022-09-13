@@ -3,10 +3,10 @@ package com.api.gerenciadordecontas.service;
 import com.api.gerenciadordecontas.enums.StatusContas;
 import com.api.gerenciadordecontas.enums.TipoContas;
 import com.api.gerenciadordecontas.exceptions.EntityNotFoundException;
+import com.api.gerenciadordecontas.model.ModelEntity;
 import com.api.gerenciadordecontas.model.ModelRequest;
 import com.api.gerenciadordecontas.model.ModelResponse;
 import com.api.gerenciadordecontas.repository.GerenciadorRepository;
-import com.api.gerenciadordecontas.model.ModelEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +41,7 @@ public class GerenciadorService {
 
     public ModelEntity buscarPorId(Long id) {
         return gerenciadorRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("ID not found "+ id));
+                () -> new EntityNotFoundException("ID not found " + id));
     }
 
     public List<ModelResponse> buscarTodos() {

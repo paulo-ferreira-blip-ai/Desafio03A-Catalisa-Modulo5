@@ -2,9 +2,9 @@ package com.api.gerenciadordecontas.controller;
 
 import com.api.gerenciadordecontas.enums.StatusContas;
 import com.api.gerenciadordecontas.enums.TipoContas;
+import com.api.gerenciadordecontas.model.ModelEntity;
 import com.api.gerenciadordecontas.model.ModelRequest;
 import com.api.gerenciadordecontas.model.ModelResponse;
-import com.api.gerenciadordecontas.model.ModelEntity;
 import com.api.gerenciadordecontas.service.GerenciadorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-@Tag(name= "CRUD de contas a pagar")
+
+@Tag(name = "CRUD de contas a pagar")
 @RestController
 @RequestMapping(path = "/contas")
 @Validated
@@ -29,7 +30,7 @@ public class GerenciadorController {
     @Operation(summary = "Operação para realizar cadastro de contas")
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> cadastrar( @Valid @RequestBody ModelRequest modelRequest) {
+    public ResponseEntity<Object> cadastrar(@Valid @RequestBody ModelRequest modelRequest) {
         if (gerenciadorService.existsByNome(modelRequest.getNome())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflito: Nome já está em uso!");
         }

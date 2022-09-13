@@ -6,7 +6,6 @@ import com.api.gerenciadordecontas.service.ServiceUsuarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,13 +19,13 @@ public class ControllerUsuarios {
     private ServiceUsuarios serviceUsuarios;
 
     @GetMapping
-    public ResponseEntity< List<ResponseUsuarios>> buscarTodos() {
-        return ResponseEntity.ok( serviceUsuarios.buscarTodos());
+    public ResponseEntity<List<ResponseUsuarios>> buscarTodos() {
+        return ResponseEntity.ok(serviceUsuarios.buscarTodos());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity< Optional<Usuarios>> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok( serviceUsuarios.buscarId(id));
+    public ResponseEntity<Optional<Usuarios>> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(serviceUsuarios.buscarId(id));
     }
 
     @PostMapping
@@ -36,8 +35,8 @@ public class ControllerUsuarios {
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity< Usuarios> alterar(@PathVariable Long id, @RequestBody Usuarios usuarios) {
-        return ResponseEntity.ok( serviceUsuarios.alterar(usuarios));
+    public ResponseEntity<Usuarios> alterar(@PathVariable Long id, @RequestBody Usuarios usuarios) {
+        return ResponseEntity.ok(serviceUsuarios.alterar(usuarios));
     }
 
     @DeleteMapping(path = "/{id}")

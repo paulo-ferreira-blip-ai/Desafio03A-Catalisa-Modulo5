@@ -13,7 +13,7 @@ public class ServiceEnderecos {
     @Autowired
     private Enderecos enderecos;
 
-    public List<com.api.gerenciadordecontas.model.Enderecos> buscarTodos(){
+    public List<com.api.gerenciadordecontas.model.Enderecos> buscarTodos() {
         return enderecos.findAll();
     }
 
