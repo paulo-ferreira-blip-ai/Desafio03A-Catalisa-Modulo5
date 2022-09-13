@@ -2,6 +2,7 @@ package com.api.gerenciadordecontas.model;
 
 import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
 import com.api.gerenciadordecontas.enums.TipoRecebimento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -40,7 +43,9 @@ public class ContasAReceber implements Serializable {
 
     private String status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
+    @JoinColumn(name = "usuarios_id", referencedColumnName = "id")
     private Usuarios usuarios;
 
 

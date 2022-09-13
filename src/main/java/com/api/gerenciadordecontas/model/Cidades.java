@@ -23,4 +23,5 @@ public class Cidades implements Serializable {
     @JoinColumn(name = "estados_id", referencedColumnName = "id")
     private Estados estados;
 
+
 }

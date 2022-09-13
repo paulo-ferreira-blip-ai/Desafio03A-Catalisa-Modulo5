@@ -37,8 +37,9 @@ public class Usuarios implements Serializable {
     @NotEmpty
     private String cpf;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "usuarios", cascade = CascadeType.ALL)
+
+    @ManyToOne
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Enderecos enderecos;
 
 }

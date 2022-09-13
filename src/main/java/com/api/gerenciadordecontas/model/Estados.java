@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.print.attribute.standard.MediaSize;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,8 +28,4 @@ public class Estados implements Serializable {
     @NotEmpty
     private String nomeEstado;
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "estados", cascade = CascadeType.ALL)
-    private List<Cidades> cidades = new ArrayList<>();
 }

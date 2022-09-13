@@ -28,11 +28,9 @@ public class Enderecos implements Serializable {
     @NotEmpty
     private String pontoReferencia;
 
-    @ManyToOne
-    @JoinColumn(name = "usuarios_id", referencedColumnName = "id")
-    private Usuarios usuarios;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "cidades_id", referencedColumnName = "id")
     private Cidades cidades;
 
 

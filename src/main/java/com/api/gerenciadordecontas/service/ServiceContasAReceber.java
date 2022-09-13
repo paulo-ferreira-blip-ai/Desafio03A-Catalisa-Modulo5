@@ -30,19 +30,22 @@ public class ServiceContasAReceber {
     public com.api.gerenciadordecontas.model.ContasAReceber cadastrar(com.api.gerenciadordecontas.model.ContasAReceber contasAReceber) {
         if (contasAReceber.getTipoRecebimento() == TipoRecebimento.ALUGUEIS &&
                 contasAReceber.getDataDeVencimento().isAfter(contasAReceber.getDataDeRecebimento())) {
+
             contasAReceber.setRecebimentoAlugueis(RecebimentoAlugueis.ADIANTADO);
 
         } else if (contasAReceber.getTipoRecebimento() == TipoRecebimento.ALUGUEIS &&
                 contasAReceber.getDataDeVencimento().equals(LocalDateTime.now(ZoneId.of("UTC-03:00")))) {
+
             contasAReceber.setRecebimentoAlugueis(RecebimentoAlugueis.EM_DIA);
 
         } else if (contasAReceber.getTipoRecebimento() == TipoRecebimento.ALUGUEIS &&
                 contasAReceber.getDataDeVencimento().isBefore(contasAReceber.getDataDeRecebimento())) {
+
             contasAReceber.setRecebimentoAlugueis(RecebimentoAlugueis.EM_ATRASO);
         }
 
 
-        BigDecimal resposta = (BigDecimal) Factory.getStatus(contasAReceber.getRecebimentoAlugueis()).calculoFactory(contasAReceber);
+        BigDecimal resposta = (BigDecimal) Factory.getStatus(contasAReceber.getRecebimentoAlugueis(), contasAReceber.getTipoRecebimento()).calculoFactory(contasAReceber);
         contasAReceber.setValorRecebimento(resposta);
 
         return this.contasAReceber.save(contasAReceber);
