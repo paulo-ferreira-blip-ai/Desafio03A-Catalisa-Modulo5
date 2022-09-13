@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException e, HttpServletRequest servletRequest){
+    public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException e, HttpServletRequest servletRequest) {
         StandardError erro = new StandardError();
         erro.setTimestamp(Instant.now());
         erro.setStatus(HttpStatus.NOT_FOUND.value());
@@ -31,7 +31,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity< Map<String, String>> handleValidationExceptions(
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
@@ -43,21 +43,24 @@ public class ControllerExceptionHandler {
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<String> exceptionHandlerEntradaInvalida(HttpMessageNotReadableException ex){
+    public ResponseEntity<String> exceptionHandlerEntradaInvalida(HttpMessageNotReadableException ex) {
         return new ResponseEntity<>("Compo digitado inválido", HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<String> exceptionHandlerContaNaoCadastrada(NoSuchElementException ex){
+    public ResponseEntity<String> exceptionHandlerContaNaoCadastrada(NoSuchElementException ex) {
         return new ResponseEntity<>("Id de conta não existente no banco de dados.", HttpStatus.NOT_FOUND);
     }
+
     @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<String> exceptionHandlerBuscaPorTipo(MethodArgumentTypeMismatchException ex) {
         return new ResponseEntity<>("Filtro de busca não existente, favor informar um válido para realizar a busca.", HttpStatus.BAD_REQUEST);
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(EmptyResultDataAccessException.class)
-    public ResponseEntity<String> exceptionIdNaoExistente(EmptyResultDataAccessException ex){
+    public ResponseEntity<String> exceptionIdNaoExistente(EmptyResultDataAccessException ex) {
         return new ResponseEntity<>("Id de conta não existente no banco de dados.", HttpStatus.NOT_FOUND);
     }
+
+
 }

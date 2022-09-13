@@ -2,31 +2,32 @@ package com.api.gerenciadordecontas.model;
 
 import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
 import com.api.gerenciadordecontas.enums.TipoRecebimento;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "contas_a_receber")
+@Validated
 public class ContasAReceber implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty
+    @NotNull
     private String recebimento;
 
     private BigDecimal valorRecebimento;
@@ -41,6 +42,8 @@ public class ContasAReceber implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private RecebimentoAlugueis recebimentoAlugueis;
 
+    @NotEmpty
+    @NotNull
     private String status;
 
 

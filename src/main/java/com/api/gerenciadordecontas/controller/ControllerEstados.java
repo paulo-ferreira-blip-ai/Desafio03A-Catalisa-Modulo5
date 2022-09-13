@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,11 +31,11 @@ public class ControllerEstados {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity< Estados> cadastrar(@RequestBody Estados estados) {
+    public ResponseEntity< Estados> cadastrar(@Valid @RequestBody Estados estados) {
         return ResponseEntity.ok( serviceEstados.cadastrar(estados));
     }
 
-    @PutMapping(path = "/{id}")
+    @PatchMapping(path = "/{id}")
     public ResponseEntity< Estados> alterar(@PathVariable Long id, @RequestBody Estados estados) {
         return ResponseEntity.ok( serviceEstados.alterar(estados));
     }

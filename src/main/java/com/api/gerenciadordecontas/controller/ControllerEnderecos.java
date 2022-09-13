@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,11 +30,11 @@ public class ControllerEnderecos {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity< Enderecos> cadastrar(@RequestBody Enderecos enderecos) {
+    public ResponseEntity< Enderecos> cadastrar(@Valid @RequestBody Enderecos enderecos) {
         return ResponseEntity.ok(serviceEnderecos.cadastrar(enderecos));
     }
 
-    @PutMapping(path = "/{id}")
+    @PatchMapping(path = "/{id}")
     public ResponseEntity< Enderecos> alterar(@PathVariable Long id, @RequestBody Enderecos enderecos) {
         return ResponseEntity.ok(serviceEnderecos.alterar(enderecos));
     }

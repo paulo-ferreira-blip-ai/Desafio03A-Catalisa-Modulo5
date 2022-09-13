@@ -1,5 +1,6 @@
 package com.api.gerenciadordecontas.service;
 
+import com.api.gerenciadordecontas.exceptions.EntityNotFoundException;
 import com.api.gerenciadordecontas.repository.Cidades;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,8 @@ public class ServiceCidades {
     }
 
     public Optional<com.api.gerenciadordecontas.model.Cidades> buscarId(Long id ){
-        return cidades.findById(id);
+        return Optional.ofNullable(cidades.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + id)));
     }
 
     public com.api.gerenciadordecontas.model.Cidades cadastrar(com.api.gerenciadordecontas.model.Cidades cidades){

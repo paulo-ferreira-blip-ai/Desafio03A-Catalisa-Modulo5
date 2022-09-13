@@ -1,5 +1,6 @@
 package com.api.gerenciadordecontas.service;
 
+import com.api.gerenciadordecontas.exceptions.EntityNotFoundException;
 import com.api.gerenciadordecontas.repository.Enderecos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class ServiceEnderecos {
     }
 
     public Optional<com.api.gerenciadordecontas.model.Enderecos> buscarId(Long id) {
-        return enderecos.findById(id);
+        return Optional.ofNullable(enderecos.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + id)));
     }
 
     public com.api.gerenciadordecontas.model.Enderecos cadastrar(com.api.gerenciadordecontas.model.Enderecos enderecos) {

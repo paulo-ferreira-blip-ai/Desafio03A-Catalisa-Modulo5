@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,11 +31,11 @@ public class ControllerCidades {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Cidades> cadastrar(@RequestBody Cidades cidades) {
+    public ResponseEntity<Cidades> cadastrar(@Valid @RequestBody Cidades cidades) {
         return ResponseEntity.ok(serviceCidades.cadastrar(cidades));
     }
 
-    @PutMapping(path = "/{id}")
+    @PatchMapping(path = "/{id}")
     public ResponseEntity< Cidades> alterar(@PathVariable Long id,@RequestBody Cidades cidades) {
         return ResponseEntity.ok(serviceCidades.alterar(cidades));
     }

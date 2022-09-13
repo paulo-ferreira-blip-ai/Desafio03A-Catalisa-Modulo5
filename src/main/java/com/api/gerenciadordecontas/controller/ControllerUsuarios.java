@@ -1,12 +1,15 @@
 package com.api.gerenciadordecontas.controller;
 
+import com.api.gerenciadordecontas.model.ResponseUsuarios;
 import com.api.gerenciadordecontas.model.Usuarios;
 import com.api.gerenciadordecontas.service.ServiceUsuarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +20,7 @@ public class ControllerUsuarios {
     private ServiceUsuarios serviceUsuarios;
 
     @GetMapping
-    public ResponseEntity< List<Usuarios>> buscarTodos() {
+    public ResponseEntity< List<ResponseUsuarios>> buscarTodos() {
         return ResponseEntity.ok( serviceUsuarios.buscarTodos());
     }
 
@@ -28,11 +31,11 @@ public class ControllerUsuarios {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> cadastrar(@RequestBody Usuarios usuarios) {
+    public ResponseEntity<Object> cadastrar(@Valid @RequestBody Usuarios usuarios) {
         return ResponseEntity.ok(serviceUsuarios.cadastrar(usuarios));
     }
 
-    @PutMapping(path = "/{id}")
+    @PatchMapping(path = "/{id}")
     public ResponseEntity< Usuarios> alterar(@PathVariable Long id, @RequestBody Usuarios usuarios) {
         return ResponseEntity.ok( serviceUsuarios.alterar(usuarios));
     }

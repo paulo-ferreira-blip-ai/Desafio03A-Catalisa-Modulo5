@@ -1,8 +1,11 @@
 package com.api.gerenciadordecontas.service;
 
 import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
+import com.api.gerenciadordecontas.enums.TipoContas;
 import com.api.gerenciadordecontas.enums.TipoRecebimento;
+import com.api.gerenciadordecontas.exceptions.EntityNotFoundException;
 import com.api.gerenciadordecontas.factory.Factory;
+import com.api.gerenciadordecontas.model.ModelEntity;
 import com.api.gerenciadordecontas.repository.ContasAReceber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +27,8 @@ public class ServiceContasAReceber {
     }
 
     public Optional<com.api.gerenciadordecontas.model.ContasAReceber> buscarId(Long id) {
-        return contasAReceber.findById(id);
+        return Optional.ofNullable(contasAReceber.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + id)));
     }
 
     public com.api.gerenciadordecontas.model.ContasAReceber cadastrar(com.api.gerenciadordecontas.model.ContasAReceber contasAReceber) {
@@ -57,5 +61,9 @@ public class ServiceContasAReceber {
 
     public void deletar(Long id) {
         contasAReceber.deleteById(id);
+    }
+
+    public List<com.api.gerenciadordecontas.model.ContasAReceber> findByTipoRecebimento(TipoRecebimento tipoRecebimento) {
+        return contasAReceber.findByTipoRecebimento(tipoRecebimento);
     }
 }
