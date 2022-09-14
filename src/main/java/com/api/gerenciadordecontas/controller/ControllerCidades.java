@@ -24,9 +24,9 @@ public class ControllerCidades {
         return ResponseEntity.ok(serviceCidades.buscarTodos());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<Cidades>> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(serviceCidades.buscarId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<Cidades>> buscarPorId(@PathVariable Long codigo) {
+        return ResponseEntity.ok(serviceCidades.buscarId(codigo));
     }
 
     @PostMapping
@@ -35,14 +35,15 @@ public class ControllerCidades {
         return ResponseEntity.ok(serviceCidades.cadastrar(cidades));
     }
 
-    @PatchMapping(path = "/{id}")
-    public ResponseEntity<Cidades> alterar(@Valid @PathVariable Long id, @RequestBody Cidades cidades) {
-        return ResponseEntity.ok(serviceCidades.alterar(cidades, id));
+    @PatchMapping(path = "/{codigo}")
+    public ResponseEntity<Cidades> alterar(@Valid @PathVariable Long codigo, @RequestBody Cidades cidades) {
+        return ResponseEntity.ok(serviceCidades.alterar(cidades, codigo));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public String deletar(@PathVariable Long id) {
-        serviceCidades.deletar(id);
+    @DeleteMapping(path = "/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public String deletar(@PathVariable Long codigo) {
+        serviceCidades.deletar(codigo);
         return "Deletado";
     }
 }

@@ -17,9 +17,9 @@ public class ServiceEstados {
         return estadosService.findAll();
     }
 
-    public Optional<com.api.gerenciadordecontas.model.Estados> buscarId(Long id) {
-        return Optional.ofNullable(estadosService.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("ID not found " + id)));
+    public Optional<com.api.gerenciadordecontas.model.Estados> buscarId(Long codigo) {
+        return Optional.ofNullable(estadosService.findById(codigo).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + codigo)));
     }
 
     public com.api.gerenciadordecontas.model.Estados cadastrar(com.api.gerenciadordecontas.model.Estados estados) {
@@ -27,14 +27,14 @@ public class ServiceEstados {
         return this.estadosService.save(estados);
     }
 
-    public com.api.gerenciadordecontas.model.Estados alterar(com.api.gerenciadordecontas.model.Estados estados, Long id) {
-                estadosService.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("ID not found " + id));
+    public com.api.gerenciadordecontas.model.Estados alterar(com.api.gerenciadordecontas.model.Estados estados, Long codigo) {
+                estadosService.findById(codigo).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + codigo));
                 return estadosService.save(estados);
 
     }
 
-    public void deletar(Long id) {
-        estadosService.deleteById(id);
+    public void deletar(Long codigo) {
+        estadosService.deleteById(codigo);
     }
 }

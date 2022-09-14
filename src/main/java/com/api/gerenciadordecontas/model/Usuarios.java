@@ -21,7 +21,7 @@ import java.time.LocalDate;
 public class Usuarios implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
     @NotEmpty
     private String nomeUsuario;
 
@@ -36,7 +36,7 @@ public class Usuarios implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    @JoinColumn(name = "enderecos_id", referencedColumnName = "codigo")
     private Enderecos enderecos;
 
 }

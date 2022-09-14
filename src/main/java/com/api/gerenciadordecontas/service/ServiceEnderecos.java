@@ -17,9 +17,9 @@ public class ServiceEnderecos {
         return enderecosService.findAll();
     }
 
-    public Optional<com.api.gerenciadordecontas.model.Enderecos> buscarId(Long id) {
-        return Optional.ofNullable(enderecosService.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("ID not found " + id)));
+    public Optional<com.api.gerenciadordecontas.model.Enderecos> buscarId(Long codigo) {
+        return Optional.ofNullable(enderecosService.findById(codigo).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + codigo)));
     }
 
     public com.api.gerenciadordecontas.model.Enderecos cadastrar(com.api.gerenciadordecontas.model.Enderecos enderecos) {
@@ -27,13 +27,13 @@ public class ServiceEnderecos {
         return this.enderecosService.save(enderecos);
     }
 
-    public com.api.gerenciadordecontas.model.Enderecos alterar(com.api.gerenciadordecontas.model.Enderecos enderecos, Long id) {
-         enderecosService.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("ID not found " + id));
+    public com.api.gerenciadordecontas.model.Enderecos alterar(com.api.gerenciadordecontas.model.Enderecos enderecos, Long codigo) {
+         enderecosService.findById(codigo).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + codigo));
         return this.enderecosService.save(enderecos);
     }
 
-    public void deletar(Long id) {
-        enderecosService.deleteById(id);
+    public void deletar(Long codigo) {
+        enderecosService.deleteById(codigo);
     }
 }

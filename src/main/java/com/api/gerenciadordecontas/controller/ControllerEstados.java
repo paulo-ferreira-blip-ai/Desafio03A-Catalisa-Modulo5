@@ -24,9 +24,9 @@ public class ControllerEstados {
         return ResponseEntity.ok(serviceEstados.buscarTodos());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<Estados>> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(serviceEstados.buscarId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<Estados>> buscarPorId(@PathVariable Long codigo) {
+        return ResponseEntity.ok(serviceEstados.buscarId(codigo));
     }
 
     @PostMapping
@@ -35,14 +35,15 @@ public class ControllerEstados {
         return ResponseEntity.ok(serviceEstados.cadastrar(estados));
     }
 
-    @PatchMapping(path = "/{id}")
-    public ResponseEntity<Estados> alterar(@PathVariable Long id, @RequestBody Estados estados) {
-        return ResponseEntity.ok(serviceEstados.alterar(estados, id));
+    @PatchMapping(path = "/{codigo}")
+    public ResponseEntity<Estados> alterar(@PathVariable Long codigo, @RequestBody Estados estados) {
+        return ResponseEntity.ok(serviceEstados.alterar(estados, codigo));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public String deletar(@PathVariable Long id) {
-        serviceEstados.deletar(id);
+    @DeleteMapping(path = "/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public String deletar(@PathVariable Long codigo) {
+        serviceEstados.deletar(codigo);
         return "Deletado";
     }
 }

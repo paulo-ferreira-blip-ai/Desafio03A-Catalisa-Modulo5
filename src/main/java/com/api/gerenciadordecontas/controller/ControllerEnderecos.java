@@ -22,9 +22,9 @@ public class ControllerEnderecos {
         return ResponseEntity.ok(serviceEnderecos.buscarTodos());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<Enderecos>> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(serviceEnderecos.buscarId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<Enderecos>> buscarPorId(@PathVariable Long codigo) {
+        return ResponseEntity.ok(serviceEnderecos.buscarId(codigo));
     }
 
     @PostMapping
@@ -33,14 +33,15 @@ public class ControllerEnderecos {
         return ResponseEntity.ok(serviceEnderecos.cadastrar(enderecos));
     }
 
-    @PatchMapping(path = "/{id}")
-    public ResponseEntity<Enderecos> alterar(@PathVariable Long id, @RequestBody Enderecos enderecos) {
-        return ResponseEntity.ok(serviceEnderecos.alterar(enderecos, id));
+    @PatchMapping(path = "/{codigo}")
+    public ResponseEntity<Enderecos> alterar(@PathVariable Long codigo, @RequestBody Enderecos enderecos) {
+        return ResponseEntity.ok(serviceEnderecos.alterar(enderecos, codigo));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public String deletarEndereco(@PathVariable Long id) {
-        serviceEnderecos.deletar(id);
+    @DeleteMapping(path = "/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public String deletarEndereco(@PathVariable Long codigo) {
+        serviceEnderecos.deletar(codigo);
         return "Deletado";
     }
 }

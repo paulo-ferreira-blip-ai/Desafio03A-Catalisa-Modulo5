@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ModelResponse {
-    private Long id;
+    private Long codigo;
     private String nome;
     private double valor;
     private StatusContas statusContas;

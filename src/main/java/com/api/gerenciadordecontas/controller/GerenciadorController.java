@@ -37,9 +37,9 @@ public class GerenciadorController {
         return ResponseEntity.ok(gerenciadorService.cadastrar(modelRequest));
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<ModelEntity> buscarPorID(@Parameter(description = "ID da conta") @PathVariable Long id) {
-        return ResponseEntity.ok(gerenciadorService.buscarPorId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<ModelEntity> buscarPorCodigo(@Parameter(description = "ID da conta") @PathVariable Long codigo) {
+        return ResponseEntity.ok(gerenciadorService.buscarPorId(codigo));
     }
 
     @GetMapping
@@ -58,15 +58,15 @@ public class GerenciadorController {
     }
 
 
-    @PatchMapping(path = "/{id}")
+    @PatchMapping(path = "/{codigo}")
     public ResponseEntity<ModelEntity> alterarStatus(@Valid @RequestBody ModelEntity modelEntity) {
         return ResponseEntity.ok(gerenciadorService.alterarCadastro(modelEntity));
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable Long id) {
-        gerenciadorService.deletar(id);
+    public void deletar(@PathVariable Long codigo) {
+        gerenciadorService.deletar(codigo);
     }
 }
 

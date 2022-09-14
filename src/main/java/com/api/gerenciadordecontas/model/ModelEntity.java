@@ -20,7 +20,7 @@ public class ModelEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
 
     @Column(name = "nome")
     private String nome;

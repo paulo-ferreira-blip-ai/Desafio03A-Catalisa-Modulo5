@@ -1,8 +1,7 @@
 package com.api.gerenciadordecontas.model;
 
 import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
-import com.api.gerenciadordecontas.enums.StatusContas;
-import com.api.gerenciadordecontas.enums.TipoRecebimento;
+import com.api.gerenciadordecontas.enums.TipoRecebido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +23,7 @@ import java.time.LocalDate;
 public class ContasAReceber implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
 
     @NotEmpty
     @NotNull
@@ -33,7 +32,7 @@ public class ContasAReceber implements Serializable {
     private BigDecimal valorRecebimento;
 
     @Enumerated(value = EnumType.STRING)
-    private TipoRecebimento tipoRecebimento;
+    private TipoRecebido tipoRecebido;
 
     private LocalDate dataDeVencimento;
 
@@ -44,7 +43,7 @@ public class ContasAReceber implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "usuarios_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuarios_id", referencedColumnName = "codigo")
     private Usuarios usuarios;
 
 

@@ -17,13 +17,14 @@ public class ServiceUsuarios {
 
     public List<ResponseUsuarios> buscarTodos() {
         List<com.api.gerenciadordecontas.model.Usuarios> campos = usuariosService.findAll();
-        return campos.stream().map(campo -> new ResponseUsuarios(campo.getId(), campo.getNomeUsuario(), campo.getDataNascimento(), campo.getEmail())).collect(Collectors.toList());
+        return campos.stream().map(campo -> new ResponseUsuarios(campo.getCodigo(), campo.getNomeUsuario(),
+                campo.getDataNascimento(), campo.getEmail())).collect(Collectors.toList());
 
     }
 
-    public Optional<com.api.gerenciadordecontas.model.Usuarios> buscarId(Long id) {
-        return Optional.ofNullable(usuariosService.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("ID not found " + id)));
+    public Optional<com.api.gerenciadordecontas.model.Usuarios> buscarId(Long codigo) {
+        return Optional.ofNullable(usuariosService.findById(codigo).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + codigo)));
     }
 
     public ResponseUsuarios cadastrar(com.api.gerenciadordecontas.model.Usuarios usuarios) {
@@ -31,17 +32,18 @@ public class ServiceUsuarios {
 
         this.usuariosService.save(usuarios);
 
-        ResponseUsuarios response = new ResponseUsuarios(usuarios.getId(), usuarios.getNomeUsuario(), usuarios.getDataNascimento(), usuarios.getEmail());
+        ResponseUsuarios response = new ResponseUsuarios(usuarios.getCodigo(), usuarios.getNomeUsuario(),
+                usuarios.getDataNascimento(), usuarios.getEmail());
         return response;
     }
 
-    public com.api.gerenciadordecontas.model.Usuarios alterar(com.api.gerenciadordecontas.model.Usuarios usuarios, Long id) {
-                usuariosService.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("ID not found " + id));
+    public com.api.gerenciadordecontas.model.Usuarios alterar(com.api.gerenciadordecontas.model.Usuarios usuarios, Long codigo) {
+                usuariosService.findById(codigo).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + codigo));
                 return usuariosService.save(usuarios);
     }
 
-    public void deletar(Long id) {
-        usuariosService.deleteById(id);
+    public void deletar(Long codigo) {
+        usuariosService.deleteById(codigo);
     }
 }

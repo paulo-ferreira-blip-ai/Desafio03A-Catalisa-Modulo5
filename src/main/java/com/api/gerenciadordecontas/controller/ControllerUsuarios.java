@@ -23,9 +23,9 @@ public class ControllerUsuarios {
         return ResponseEntity.ok(serviceUsuarios.buscarTodos());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<Usuarios>> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(serviceUsuarios.buscarId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<Usuarios>> buscarPorId(@PathVariable Long codigo) {
+        return ResponseEntity.ok(serviceUsuarios.buscarId(codigo));
     }
 
     @PostMapping
@@ -34,14 +34,15 @@ public class ControllerUsuarios {
         return ResponseEntity.ok(serviceUsuarios.cadastrar(usuarios));
     }
 
-    @PatchMapping(path = "/{id}")
-    public ResponseEntity<Usuarios> alterar(@PathVariable Long id, @RequestBody Usuarios usuarios) {
-        return ResponseEntity.ok(serviceUsuarios.alterar(usuarios, id));
+    @PatchMapping(path = "/{codigo}")
+    public ResponseEntity<Usuarios> alterar(@PathVariable Long codigo, @RequestBody Usuarios usuarios) {
+        return ResponseEntity.ok(serviceUsuarios.alterar(usuarios, codigo));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public String deletar(@PathVariable Long id) {
-        serviceUsuarios.deletar(id);
+    @DeleteMapping(path = "/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public String deletar(@PathVariable Long codigo) {
+        serviceUsuarios.deletar(codigo);
         return "Deletado";
     }
 }

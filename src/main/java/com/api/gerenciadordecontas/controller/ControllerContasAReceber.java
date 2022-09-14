@@ -1,8 +1,7 @@
 package com.api.gerenciadordecontas.controller;
 
 import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
-import com.api.gerenciadordecontas.enums.StatusContas;
-import com.api.gerenciadordecontas.enums.TipoRecebimento;
+import com.api.gerenciadordecontas.enums.TipoRecebido;
 import com.api.gerenciadordecontas.model.ContasAReceber;
 import com.api.gerenciadordecontas.service.ServiceContasAReceber;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,14 @@ public class ControllerContasAReceber {
         return ResponseEntity.ok(serviceContasAReceber.buscarTodos());
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<ContasAReceber>> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(serviceContasAReceber.buscarId(id));
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<Optional<ContasAReceber>> buscarPorId(@PathVariable Long codigo) {
+        return ResponseEntity.ok(serviceContasAReceber.buscarId(codigo));
     }
 
-    @GetMapping(path = "/recebimento/{tipoRecebimento}")
-    public ResponseEntity<List<ContasAReceber>> findByTipoRecebimento(@PathVariable TipoRecebimento tipoRecebimento) {
-        return ResponseEntity.ok(serviceContasAReceber.findByTipoRecebimento(tipoRecebimento));
+    @GetMapping(path = "/recebido/{tipoRecebido}")
+    public ResponseEntity<List<ContasAReceber>> findByTipoRecebimento(@PathVariable TipoRecebido tipoRecebido) {
+        return ResponseEntity.ok(serviceContasAReceber.findByTipoRecebido(tipoRecebido));
     }
 
     @GetMapping(path = "/status/{status}")
@@ -48,14 +47,15 @@ public class ControllerContasAReceber {
         return ResponseEntity.ok(serviceContasAReceber.cadastrar(contasAReceber));
     }
 
-    @PatchMapping(path = "/{id}")
-    public ResponseEntity<ContasAReceber> alterar(@PathVariable Long id, @RequestBody ContasAReceber contasAReceber) {
-        return ResponseEntity.ok(serviceContasAReceber.alterar(contasAReceber, id));
+    @PatchMapping(path = "/{codigo}")
+    public ResponseEntity<ContasAReceber> alterar(@PathVariable Long codigo, @RequestBody ContasAReceber contasAReceber) {
+        return ResponseEntity.ok(serviceContasAReceber.alterar(contasAReceber, codigo));
     }
 
-    @DeleteMapping(path = "/{id}")
-    public String deletar(@PathVariable Long id) {
-        serviceContasAReceber.deletar(id);
+    @DeleteMapping(path = "/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public String deletar(@PathVariable Long codigo) {
+        serviceContasAReceber.deletar(codigo);
         return "Deletado";
     }
 }

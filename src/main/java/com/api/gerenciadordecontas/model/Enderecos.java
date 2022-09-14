@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class Enderecos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
     @NotEmpty
     private String logradouro;
     @NotEmpty
@@ -30,7 +30,7 @@ public class Enderecos implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "cidades_id", referencedColumnName = "id")
+    @JoinColumn(name = "cidades_id", referencedColumnName = "codigo")
     private Cidades cidades;
 
 

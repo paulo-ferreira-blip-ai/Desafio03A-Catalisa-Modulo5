@@ -18,10 +18,10 @@ public class ServiceCidades {
         return cidadesService.findAll();
     }
 
-    public Optional<com.api.gerenciadordecontas.model.Cidades> buscarId(Long id) {
+    public Optional<com.api.gerenciadordecontas.model.Cidades> buscarId(Long codigo) {
 
-        return Optional.ofNullable(cidadesService.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("ID not found " + id)));
+        return Optional.ofNullable(cidadesService.findById(codigo).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + codigo)));
     }
 
     public com.api.gerenciadordecontas.model.Cidades cadastrar(com.api.gerenciadordecontas.model.Cidades cidades) {
@@ -29,14 +29,14 @@ public class ServiceCidades {
         return this.cidadesService.save(cidades);
     }
 
-    public com.api.gerenciadordecontas.model.Cidades alterar(com.api.gerenciadordecontas.model.Cidades cidades,Long id) {
-                cidadesService.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("ID not found " + id));
+    public com.api.gerenciadordecontas.model.Cidades alterar(com.api.gerenciadordecontas.model.Cidades cidades,Long codigo) {
+                cidadesService.findById(codigo).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + codigo));
         return this.cidadesService.save(cidades);
     }
 
-    public void deletar(Long id) {
-        cidadesService.deleteById(id);
+    public void deletar(Long codigo) {
+        cidadesService.deleteById(codigo);
     }
 
 

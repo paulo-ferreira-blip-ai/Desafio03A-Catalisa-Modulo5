@@ -1,6 +1,6 @@
 package com.api.gerenciadordecontas.enums;
 
-public enum TipoRecebimento {
+public enum TipoRecebido {
     ALUGUEIS,
     EMPREGO_CLT,
     FREELANCER

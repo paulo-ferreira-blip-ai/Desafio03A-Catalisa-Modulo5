@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class Estados implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
     @NotEmpty
     private String uf;
     @NotEmpty

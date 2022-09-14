@@ -2,7 +2,7 @@ package com.api.gerenciadordecontas.factory;
 
 import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
 import com.api.gerenciadordecontas.enums.StatusContas;
-import com.api.gerenciadordecontas.enums.TipoRecebimento;
+import com.api.gerenciadordecontas.enums.TipoRecebido;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,17 +11,17 @@ import java.time.chrono.ChronoLocalDate;
 import static com.api.gerenciadordecontas.enums.StatusContas.*;
 
 public class Factory {
-    public static Calculador getStatus(RecebimentoAlugueis status, TipoRecebimento tipoRecebimento) {
+    public static Calculador getStatus(RecebimentoAlugueis status, TipoRecebido tipoRecebido) {
         if (status == RecebimentoAlugueis.EM_ATRASO) {
             return new AtrasoMulta();
         } else if (status == RecebimentoAlugueis.EM_DIA) {
             return new EmDia();
         } else if (status == RecebimentoAlugueis.ADIANTADO) {
             return new Adiantado();
-        } else if (tipoRecebimento == TipoRecebimento.EMPREGO_CLT) {
+        } else if (tipoRecebido == TipoRecebido.EMPREGO_CLT) {
             return new Emprego_Clt();
 
-        } else if (tipoRecebimento == TipoRecebimento.FREELANCER) {
+        } else if (tipoRecebido == TipoRecebido.FREELANCER) {
             return new Freelancer();
 
         } else {
