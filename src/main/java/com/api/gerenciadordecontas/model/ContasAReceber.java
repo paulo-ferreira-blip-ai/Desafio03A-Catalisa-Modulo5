@@ -1,6 +1,7 @@
 package com.api.gerenciadordecontas.model;
 
 import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
+import com.api.gerenciadordecontas.enums.StatusContas;
 import com.api.gerenciadordecontas.enums.TipoRecebimento;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,8 +13,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -35,16 +35,12 @@ public class ContasAReceber implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private TipoRecebimento tipoRecebimento;
 
-    private LocalDateTime dataDeVencimento;
+    private LocalDate dataDeVencimento;
 
-    private LocalDateTime dataDeRecebimento = LocalDateTime.now(ZoneId.of("UTC-03:00"));
+    private LocalDate dataDeRecebimento;
 
     @Enumerated(value = EnumType.STRING)
-    private RecebimentoAlugueis recebimentoAlugueis;
-
-    @NotEmpty
-    @NotNull
-    private String status;
+    private RecebimentoAlugueis status;
 
 
     @ManyToOne

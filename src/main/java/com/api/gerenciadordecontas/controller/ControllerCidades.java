@@ -36,8 +36,8 @@ public class ControllerCidades {
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<Cidades> alterar(@PathVariable Long id, @RequestBody Cidades cidades) {
-        return ResponseEntity.ok(serviceCidades.alterar(cidades));
+    public ResponseEntity<Cidades> alterar(@Valid @PathVariable Long id, @RequestBody Cidades cidades) {
+        return ResponseEntity.ok(serviceCidades.alterar(cidades, id));
     }
 
     @DeleteMapping(path = "/{id}")

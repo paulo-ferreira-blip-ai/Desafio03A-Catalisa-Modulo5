@@ -10,12 +10,7 @@ public enum StatusContas {
     PAGO,
     VENCIDA;
 
-    public static StatusContas condicoes(LocalDate dataVencimento, LocalDateTime dataCadastro) {
-        if (dataVencimento.isBefore(ChronoLocalDate.from(dataCadastro))) {
-            return VENCIDA;
-        } else {
-            return AGUARDANDO;
-        }
-    }
 }
+
+
 

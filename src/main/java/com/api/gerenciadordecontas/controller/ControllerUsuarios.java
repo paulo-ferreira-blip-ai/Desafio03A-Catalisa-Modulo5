@@ -36,7 +36,7 @@ public class ControllerUsuarios {
 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<Usuarios> alterar(@PathVariable Long id, @RequestBody Usuarios usuarios) {
-        return ResponseEntity.ok(serviceUsuarios.alterar(usuarios));
+        return ResponseEntity.ok(serviceUsuarios.alterar(usuarios, id));
     }
 
     @DeleteMapping(path = "/{id}")

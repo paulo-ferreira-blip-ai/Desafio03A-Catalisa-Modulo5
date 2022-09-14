@@ -1,5 +1,7 @@
 package com.api.gerenciadordecontas.controller;
 
+import com.api.gerenciadordecontas.enums.RecebimentoAlugueis;
+import com.api.gerenciadordecontas.enums.StatusContas;
 import com.api.gerenciadordecontas.enums.TipoRecebimento;
 import com.api.gerenciadordecontas.model.ContasAReceber;
 import com.api.gerenciadordecontas.service.ServiceContasAReceber;
@@ -35,6 +37,11 @@ public class ControllerContasAReceber {
         return ResponseEntity.ok(serviceContasAReceber.findByTipoRecebimento(tipoRecebimento));
     }
 
+    @GetMapping(path = "/status/{status}")
+    public ResponseEntity<List<ContasAReceber>> findByTipoRecebimento(@PathVariable RecebimentoAlugueis status) {
+        return ResponseEntity.ok(serviceContasAReceber.findByStatus(status));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ContasAReceber> cadastrar(@Valid @RequestBody ContasAReceber contasAReceber) {
@@ -43,7 +50,7 @@ public class ControllerContasAReceber {
 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<ContasAReceber> alterar(@PathVariable Long id, @RequestBody ContasAReceber contasAReceber) {
-        return ResponseEntity.ok(serviceContasAReceber.alterar(contasAReceber));
+        return ResponseEntity.ok(serviceContasAReceber.alterar(contasAReceber, id));
     }
 
     @DeleteMapping(path = "/{id}")

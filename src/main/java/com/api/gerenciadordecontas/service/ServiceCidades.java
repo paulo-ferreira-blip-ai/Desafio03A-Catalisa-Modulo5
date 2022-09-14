@@ -12,28 +12,31 @@ import java.util.Optional;
 public class ServiceCidades {
 
     @Autowired
-    private Cidades cidades;
+    private Cidades cidadesService;
 
     public List<com.api.gerenciadordecontas.model.Cidades> buscarTodos() {
-        return cidades.findAll();
+        return cidadesService.findAll();
     }
 
     public Optional<com.api.gerenciadordecontas.model.Cidades> buscarId(Long id) {
-        return Optional.ofNullable(cidades.findById(id).orElseThrow(
+
+        return Optional.ofNullable(cidadesService.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("ID not found " + id)));
     }
 
     public com.api.gerenciadordecontas.model.Cidades cadastrar(com.api.gerenciadordecontas.model.Cidades cidades) {
 
-        return this.cidades.save(cidades);
+        return this.cidadesService.save(cidades);
     }
 
-    public com.api.gerenciadordecontas.model.Cidades alterar(com.api.gerenciadordecontas.model.Cidades cidades) {
-        return this.cidades.save(cidades);
+    public com.api.gerenciadordecontas.model.Cidades alterar(com.api.gerenciadordecontas.model.Cidades cidades,Long id) {
+                cidadesService.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("ID not found " + id));
+        return this.cidadesService.save(cidades);
     }
 
     public void deletar(Long id) {
-        cidades.deleteById(id);
+        cidadesService.deleteById(id);
     }
 
 

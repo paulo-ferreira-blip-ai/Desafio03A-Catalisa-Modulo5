@@ -37,7 +37,7 @@ public class ControllerEstados {
 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<Estados> alterar(@PathVariable Long id, @RequestBody Estados estados) {
-        return ResponseEntity.ok(serviceEstados.alterar(estados));
+        return ResponseEntity.ok(serviceEstados.alterar(estados, id));
     }
 
     @DeleteMapping(path = "/{id}")

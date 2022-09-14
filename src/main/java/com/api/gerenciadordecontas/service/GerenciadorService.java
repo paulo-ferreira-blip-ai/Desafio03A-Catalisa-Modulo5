@@ -3,6 +3,7 @@ package com.api.gerenciadordecontas.service;
 import com.api.gerenciadordecontas.enums.StatusContas;
 import com.api.gerenciadordecontas.enums.TipoContas;
 import com.api.gerenciadordecontas.exceptions.EntityNotFoundException;
+import com.api.gerenciadordecontas.factory.Factory;
 import com.api.gerenciadordecontas.model.ModelEntity;
 import com.api.gerenciadordecontas.model.ModelRequest;
 import com.api.gerenciadordecontas.model.ModelResponse;
@@ -27,7 +28,7 @@ public class GerenciadorService {
 
         modelRequest.setDataDeCadastro(LocalDateTime.now(ZoneId.of("UTC-03:00")));
 
-        StatusContas resposta1 = StatusContas.condicoes(modelRequest.getDataDeVencimento(), modelRequest.getDataDeCadastro());
+        StatusContas resposta1 = Factory.condicoes(modelRequest.getDataDeVencimento(), modelRequest.getDataDeCadastro());
         modelRequest.setStatusContas(resposta1);
 
         modelRequest.setDataDePagamento(null);

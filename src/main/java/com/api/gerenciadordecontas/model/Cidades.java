@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,6 +29,9 @@ public class Cidades implements Serializable {
     @ManyToOne
     @JoinColumn(name = "estados_id", referencedColumnName = "id")
     private Estados estados;
+
+//    @OneToMany(mappedBy = "enderecos", cascade = CascadeType.ALL)
+//    private List<Enderecos> enderecos;
 
 
 }

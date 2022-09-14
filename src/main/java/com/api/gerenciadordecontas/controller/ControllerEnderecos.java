@@ -35,7 +35,7 @@ public class ControllerEnderecos {
 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<Enderecos> alterar(@PathVariable Long id, @RequestBody Enderecos enderecos) {
-        return ResponseEntity.ok(serviceEnderecos.alterar(enderecos));
+        return ResponseEntity.ok(serviceEnderecos.alterar(enderecos, id));
     }
 
     @DeleteMapping(path = "/{id}")
